@@ -1,92 +1,75 @@
-# Medical Aesthetics Social Media Management System
+# 曜亞 × 默默 醫美社群經營系統
 
-A comprehensive system for managing social media content for medical aesthetics brands (P-Plasma, AestheFill, Hera). This project integrates Google Workspace automation, local Node.js scripts, and a web-based visual dashboard to streamline content creation, planning, and tracking.
+> **DMT (Digital Marketing Tools)** - 曜亞生醫 × 默默網路行銷 合作專案
 
-> **🆕 Latest Updates (2025-12)**
-> - ✅ Integrated with **AI Pro (Gemini 3 Pro, Veo 3.1, Nano Banana)**
-> - ✅ Express 5 compatibility
-> - ✅ Unified utils.js logger module
-> - ✅ Jules AI code quality refactoring
+針對三大醫美品牌 (P-Plasma, AestheFill, Hera) 的 B2B 社群內容管理系統。
 
-## 🚀 Features
+## 🆕 最新更新 (2025-12)
 
-*   **Visual Board**: A web-based dashboard to monitor monthly goals, visual identity, and content progress.
-*   **Automation Scripts**: Node.js scripts to sync local Markdown planning files with Google Sheets and Google Slides.
-*   **AI Pro Integration**: Leverages Gemini 3 Pro for copy, Veo 3.1 for video, Nano Banana for images.
-*   **Centralized Planning**: A set of Markdown files in the `Planning/` directory that serves as the single source of truth.
+- ✅ 整合 **AI Pro** (Gemini 3 Pro, Veo 3.1, Nano Banana)
+- ✅ Express 5 + 安全漏洞修復
+- ✅ Jules AI 程式碼品質重構
 
-## 📂 Repository Structure
+---
 
-```text
-.
-├── Planning/                   # Documentation, strategies, and AI workflows
-│   ├── Master_Command_Center.md          # Central hub for operations & progress tracking
-│   ├── AI_Team_Workflow.md               # AI roles, prompts, and workflows
-│   ├── Project_Requirements_Strategy.md  # Brand strategy, target audience, and requirements
-│   ├── Tone_and_Manner_Visuals.md        # Visual guidelines and mood boards
-│   ├── SYSTEM_DOCUMENTATION.md           # Detailed system documentation
+## 🚀 功能
+
+| 功能 | 說明 |
+|:---|:---|
+| **Visual Board** | 網頁儀表板：月目標、品牌視覺、內容進度 |
+| **自動化腳本** | Google Sheets / Slides 同步 |
+| **AI Pro 整合** | Gemini 3 Pro 文案、Veo 3.1 影片、Nano Banana 圖片 |
+| **集中規劃** | Planning 目錄為單一資料來源 |
+
+---
+
+## 📂 專案結構
+
+```
+├── Planning/                # 策略文件、AI 工作流程
+│   ├── Master_Command_Center.md  # 核心控制中心
+│   ├── AI_Team_Workflow.md       # AI 團隊角色與提示詞
 │   └── ...
-├── Scripts/                    # Node.js automation scripts
-│   ├── sync-sheets.js          # Syncs Markdown tables to Google Sheets
-│   ├── sync-slides.js          # Syncs content to Google Slides
-│   ├── generate-copy.js        # Generates draft copy using AI
-│   └── ...
-├── visual-board/               # Web-based visual dashboard application
-│   ├── server.js               # Express server for the board
-│   ├── index.html              # Dashboard frontend
-│   └── ...
-├── VISUAL_BOARD_CENTER.md      # Quick access guide and "War Room" document
-└── package.json                # Project dependencies and scripts
+├── Scripts/                 # Node.js 自動化腳本
+│   ├── sync-sheets.js       # 同步到 Google Sheets
+│   ├── sync-slides.js       # 同步到 Google Slides
+│   └── health-check.js      # 系統健康檢查
+├── visual-board/            # 網頁儀表板
+│   ├── server.js
+│   └── index.html
+└── package.json
 ```
 
-## 🛠️ Setup & Installation
+---
 
-1.  **Prerequisites**: Ensure you have Node.js installed.
-2.  **Install Dependencies**:
-    ```bash
-    npm install
-    ```
-3.  **Google Cloud Setup**:
-    *   Ensure you have the necessary Google Cloud credentials configured if you intend to use the synchronization scripts. The scripts typically look for credential files or tokens to authenticate with Google APIs.
+## 🛠️ 快速開始
 
-## 💻 How to Run
-
-### Visual Board
-To start the web-based visual dashboard:
 ```bash
+# 安裝相依套件
+npm install
+
+# 啟動 Visual Board (http://localhost:3000)
 npm run board
-# OR
-node visual-board/server.js
+
+# 同步到 Google Sheets
+node Scripts/sync-sheets.js
+
+# 系統健康檢查
+node Scripts/health-check.js
 ```
-Then open your browser at the address specified in the console (usually `http://localhost:3000`).
 
-### Automation Scripts
-Run scripts directly using Node.js from the root directory:
+---
 
-*   **Sync Sheets**: Updates Google Sheets with data from `Master_Command_Center.md`.
-    ```bash
-    node Scripts/sync-sheets.js
-    ```
-*   **Sync Slides**: Updates Google Slides with content.
-    ```bash
-    node Scripts/sync-slides.js
-    ```
-*   **Format Sheets**: Beautifies the Google Sheet.
-    ```bash
-    node Scripts/format-sheets.js
-    ```
+## 🔗 相關連結
 
-## 📄 Key Planning Documents
+| 連結 | 說明 |
+|:---|:---|
+| [Visual Board](./VISUAL_BOARD_CENTER.md) | 儀表板快速入口 |
+| [Planning](./Planning/) | 策略規劃文件 |
+| [mursfoto-devops](https://github.com/YenRuHuang/mursfoto-devops) | DevOps 工具與部署指南 |
 
-The `Planning/` folder contains the core intelligence of the system:
+---
 
-*   **`Master_Command_Center.md`**: The main operational interface. Contains the content calendar, progress tracker, and links to all other documents. This file is often synced to Google Sheets.
-*   **`AI_Team_Workflow.md`**: Defines the roles of the "AI Team" (e.g., Strategy Planner, Content Marketing Chief), their tools, and the specific prompts to use for generating content.
-*   **`Project_Requirements_Strategy.md`**: Outlines the high-level strategy, B2B focus, and unique selling points for each brand.
-*   **`Tone_and_Manner_Visuals.md`**: Provides visual references, color codes, and keywords for each brand to ensure consistency.
-*   **`SYSTEM_DOCUMENTATION.md`**: A detailed technical and operational guide for the entire system (in Traditional Chinese).
+## 📄 授權
 
-## 🔗 Quick Links
-*   [Visual Board Center](./VISUAL_BOARD_CENTER.md)
-*   [Planning Folder](./Planning/)
-*   [Scripts Folder](./Scripts/)
+MIT License
