@@ -2,11 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const { google } = require('googleapis');
 
-// 設定
-const CREDENTIALS_PATH = '/Users/murs/Documents/曜亞X默默的社群經營/glass-tide-461207-j2-8b7a7afd3e07.json';
-const SPREADSHEET_ID = '1Qvh58taqZD-q30FLO3wRKm6htsZ4Muy2lUlCJFlc4p8';
-const MARKDOWN_FILE_PATH = '/Users/murs/Documents/曜亞X默默的社群經營/Planning/Master_Command_Center.md';
-const SHEET_NAME = '進度追蹤_乾淨版'; // 新的工作表名稱
+// 使用共享設定模組
+const config = require('./config');
+const { CREDENTIALS_PATH, SPREADSHEET_ID, MARKDOWN_FILE_PATH, SHEET_NAME } = config;
 
 async function syncSheets() {
   try {

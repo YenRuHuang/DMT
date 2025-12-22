@@ -1,15 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 const { google } = require('googleapis');
-// 注意：此腳本需要 OpenAI API Key，請確保環境變數中有設定 OPENAI_API_KEY
-// 或者你可以修改此腳本使用其他 LLM API
 
-// 設定
-const MARKDOWN_FILE_PATH = '/Users/murs/Documents/曜亞X默默的社群經營/Planning/Master_Command_Center.md';
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY; // 從環境變數讀取
+// 使用共享設定模組
+const config = require('./config');
+const { MARKDOWN_FILE_PATH, GEMINI_API_KEY, OPENAI_API_KEY, BRANDS, FORBIDDEN_WORDS } = config;
 
-// 模擬 AI 生成 (如果沒有 API Key)
-const MOCK_AI = !OPENAI_API_KEY;
+// AI 模式選擇：優先 Gemini > OpenAI > Mock
+const AI_MODE = GEMINI_API_KEY ? 'gemini' : (OPENAI_API_KEY ? 'openai' : 'mock');
+console.log(`🤖 AI 模式: ${AI_MODE.toUpperCase()}`);
 
 async function generateCopy(rowNumber = null) {
   try {
