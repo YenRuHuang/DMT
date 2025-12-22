@@ -1,0 +1,19 @@
+{
+  "name": "murs-social-management",
+  "version": "1.0.0",
+  "description": "Social media management automation scripts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "board": "node visual-board/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "googleapis": "^167.0.0",
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "chokidar": "^3.5.3"
+  }
+}

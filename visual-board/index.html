@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>曜亞 × 默默 | 視覺看板中心</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Outfit:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Background Gradient -->
+    <div class="bg-gradient"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">曜亞 × 默默 <span class="accent">視覺看板</span></h1>
+            <div class="date-display" id="currentDate"></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- KPI Dashboard Section -->
+            <section class="kpi-section">
+                <h2 class="section-title">📌 12月核心目標</h2>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-icon">📝</span>
+                            <h3>圖文貼文</h3>
+                        </div>
+                        <div class="progress-circle" data-target="posts">
+                            <svg viewBox="0 0 120 120">
+                                <circle class="progress-bg" cx="60" cy="60" r="54"></circle>
+                                <circle class="progress-bar" cx="60" cy="60" r="54" id="postsCircle"></circle>
+                            </svg>
+                            <div class="progress-text">
+                                <span class="progress-value" id="postsValue">0</span>
+                                <span class="progress-total">/6</span>
+                            </div>
+                        </div>
+                        <p class="kpi-label">每月 6 篇</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-icon">📱</span>
+                            <h3>限時動態</h3>
+                        </div>
+                        <div class="progress-circle" data-target="stories">
+                            <svg viewBox="0 0 120 120">
+                                <circle class="progress-bg" cx="60" cy="60" r="54"></circle>
+                                <circle class="progress-bar" cx="60" cy="60" r="54" id="storiesCircle"></circle>
+                            </svg>
+                            <div class="progress-text">
+                                <span class="progress-value" id="storiesValue">0</span>
+                                <span class="progress-total">/10</span>
+                            </div>
+                        </div>
+                        <p class="kpi-label">每月 10 則</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-icon">🎬</span>
+                            <h3>短影音</h3>
+                        </div>
+                        <div class="progress-circle" data-target="reels">
+                            <svg viewBox="0 0 120 120">
+                                <circle class="progress-bg" cx="60" cy="60" r="54"></circle>
+                                <circle class="progress-bar" cx="60" cy="60" r="54" id="reelsCircle"></circle>
+                            </svg>
+                            <div class="progress-text">
+                                <span class="progress-value" id="reelsValue">0</span>
+                                <span class="progress-total">/2</span>
+                            </div>
+                        </div>
+                        <p class="kpi-label">每月 2 支</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Strategy Section -->
+            <section class="strategy-section">
+                <h2 class="section-title">📋 核心策略</h2>
+
+                <!-- Goals Cards -->
+                <div class="goals-grid">
+                    <div class="goal-card">
+                        <div class="goal-icon">🎯</div>
+                        <h3>出圈</h3>
+                        <p>拓展觸及到陌生客群，擴大品牌影響力</p>
+                    </div>
+                    <div class="goal-card">
+                        <div class="goal-icon">🔗</div>
+                        <h3>黏著度</h3>
+                        <p>穩定增長既有受眾，維持高互動率</p>
+                    </div>
+                    <div class="goal-card">
+                        <div class="goal-icon">🤝</div>
+                        <h3>異業合作</h3>
+                        <p>保持內容彈性，配合跨產業品牌合作</p>
+                    </div>
+                </div>
+
+                <!-- Strategy Details -->
+                <div class="strategy-grid">
+                    <!-- Content Strategy Card -->
+                    <div class="strategy-card">
+                        <h3>📊 內容策略配比</h3>
+                        <div class="strategy-chart">
+                            <div class="chart-item">
+                                <div class="chart-bar knowledge">
+                                    <span class="chart-label">知識性</span>
+                                    <span class="chart-value">2-3 篇</span>
+                                </div>
+                                <p class="chart-desc">材料介紹、醫學知識、痛點解決方案</p>
+                            </div>
+                            <div class="chart-item">
+                                <div class="chart-bar lifestyle">
+                                    <span class="chart-label">生活類</span>
+                                    <span class="chart-value">2-3 篇</span>
+                                </div>
+                                <p class="chart-desc">節慶話題、時事跟風、氛圍感品牌價值</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monthly Theme Card -->
+                    <div class="strategy-card theme-card">
+                        <h3>🎨 本月主題</h3>
+                        <div class="theme-content">
+                            <div class="theme-title">年末閃耀</div>
+                            <div class="theme-subtitle">Glow Up for the Holidays</div>
+                            <p class="theme-desc">原廠賦能特別企劃 · 聚焦醫美診所與醫師端</p>
+                        </div>
+                    </div>
+
+                    <!-- Workflow Timeline Card -->
+                    <div class="strategy-card workflow-card">
+                        <h3>📅 作業時程</h3>
+                        <div class="workflow-timeline">
+                            <div class="timeline-item">
+                                <span class="timeline-date">每月 10 日前</span>
+                                <span class="timeline-task">結案成果報告</span>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="timeline-date">每月 20 日前</span>
+                                <span class="timeline-task">企劃提案（初稿）</span>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="timeline-date">每月 27 日前</span>
+                                <span class="timeline-task">企劃內容（定案）</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Brand Visual Wall -->
+            <section class="brand-section">
+                <h2 class="section-title">🎨 品牌視覺牆</h2>
+                <div class="brand-grid">
+                    <!-- Hera Card -->
+                    <div class="brand-card hera">
+                        <div class="brand-header">
+                            <h3>Hera 赫拉波</h3>
+                            <div class="brand-colors">
+                                <span class="color-dot"
+                                    style="background: linear-gradient(135deg, #ffc0e3, #d4a5ff);"></span>
+                                <span class="color-dot"
+                                    style="background: linear-gradient(135deg, #ffd700, #ffb347);"></span>
+                            </div>
+                        </div>
+                        <div class="brand-keywords">
+                            <span class="keyword">透明感</span>
+                            <span class="keyword">少女</span>
+                            <span class="keyword">流動</span>
+                            <span class="keyword">光線折射</span>
+                        </div>
+                        <div class="brand-visual">
+                            <div class="visual-placeholder hera-visual">
+                                <span class="visual-icon">✨</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- P-Plasma Card -->
+                    <div class="brand-card plasma">
+                        <div class="brand-header">
+                            <h3>P電漿</h3>
+                            <div class="brand-colors">
+                                <span class="color-dot"
+                                    style="background: linear-gradient(135deg, #4a90e2, #50c9ff);"></span>
+                                <span class="color-dot"
+                                    style="background: linear-gradient(135deg, #ffffff, #f0f0f0);"></span>
+                            </div>
+                        </div>
+                        <div class="brand-keywords">
+                            <span class="keyword">物理感</span>
+                            <span class="keyword">顯微鏡</span>
+                            <span class="keyword">乾淨</span>
+                            <span class="keyword">修復</span>
+                        </div>
+                        <div class="brand-visual">
+                            <div class="visual-placeholder plasma-visual">
+                                <span class="visual-icon">🔬</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AestheFill Card -->
+                    <div class="brand-card aesthefill">
+                        <div class="brand-header">
+                            <h3>精靈聚雙璇</h3>
+                            <div class="brand-colors">
+                                <span class="color-dot"
+                                    style="background: linear-gradient(135deg, #e8b4ff, #c4a0ff);"></span>
+                                <span class="color-dot"
+                                    style="background: linear-gradient(135deg, #ffc0e3, #ffb3d9);"></span>
+                            </div>
+                        </div>
+                        <div class="brand-keywords">
+                            <span class="keyword">泡泡</span>
+                            <span class="keyword">圓球</span>
+                            <span class="keyword">夢幻</span>
+                            <span class="keyword">自然</span>
+                        </div>
+                        <div class="brand-visual">
+                            <div class="visual-placeholder aesthefill-visual">
+                                <span class="visual-icon">🫧</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Schedule Tracker -->
+            <section class="schedule-section">
+                <h2 class="section-title">📅 本週排程追蹤</h2>
+                <div class="schedule-container">
+                    <div class="schedule-filter">
+                        <button class="filter-btn active" data-filter="all">全部</button>
+                        <button class="filter-btn" data-filter="hera">Hera</button>
+                        <button class="filter-btn" data-filter="plasma">P電漿</button>
+                        <button class="filter-btn" data-filter="aesthefill">精靈聚雙璇</button>
+                    </div>
+                    <div class="schedule-list" id="scheduleList">
+                        <!-- Schedule items will be dynamically generated -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Command Center -->
+            <section class="ai-section">
+                <h2 class="section-title">🤖 AI 指令操作台</h2>
+                <div class="ai-grid">
+                    <div class="ai-card">
+                        <div class="ai-header">
+                            <span class="ai-icon">✍️</span>
+                            <h3>文案產出 (內容行銷長)</h3>
+                        </div>
+                        <div class="ai-content">
+                            <p class="ai-prompt">本週 P電漿的主題是「冬季敏感肌急救」。請撰寫一篇針對「醫師/診所」看的專業貼文，強調電漿的殺菌修復機制與臨床優勢，語氣客觀權威。</p>
+                            <button class="copy-btn"
+                                data-prompt="本週 P電漿的主題是「冬季敏感肌急救」。請撰寫一篇針對「醫師/診所」看的專業貼文，強調電漿的殺菌修復機制與臨床優勢，語氣客觀權威。">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-text">複製指令</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="ai-card">
+                        <div class="ai-header">
+                            <span class="ai-icon">🎨</span>
+                            <h3>視覺產出 (Nano Banana)</h3>
+                        </div>
+                        <div class="ai-content">
+                            <p class="ai-prompt">請為上述貼文生成一張配圖
+                                Prompt。畫面要呈現「顯微鏡下的電漿藍色光弧，正在修復受損的粉色肌膚細胞」，風格要科技感且乾淨，適合放在診所衛教螢幕。</p>
+                            <button class="copy-btn"
+                                data-prompt="請為上述貼文生成一張配圖 Prompt。畫面要呈現「顯微鏡下的電漿藍色光弧，正在修復受損的粉色肌膚細胞」，風格要科技感且乾淨，適合放在診所衛教螢幕。">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-text">複製指令</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="ai-card">
+                        <div class="ai-header">
+                            <span class="ai-icon">🎬</span>
+                            <h3>影片產出 (Google Veo 3)</h3>
+                        </div>
+                        <div class="ai-content">
+                            <p class="ai-prompt">請為 Hera 生成一支 15秒 Reels 的
+                                Prompt。畫面是「粉紫金色的透明能量在玻璃肌膚上流動」，背景隱約有希臘女神的輪廓，氛圍神祕奢華，強調光線折射的晶透感。</p>
+                            <button class="copy-btn"
+                                data-prompt="請為 Hera 生成一支 15秒 Reels 的 Prompt。畫面是「粉紫金色的透明能量在玻璃肌膚上流動」，背景隱約有希臘女神的輪廓，氛圍神祕奢華，強調光線折射的晶透感。">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-text">複製指令</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Tools -->
+            <section class="tools-section">
+                <h2 class="section-title">⚙️ 快速工具</h2>
+                <div class="tools-grid">
+                    <a href="../Planning/" class="tool-card">
+                        <span class="tool-icon">📂</span>
+                        <h3>企劃目錄</h3>
+                        <p>所有策略文件</p>
+                    </a>
+                    <button class="tool-card sync-btn" id="syncStrategy">
+                        <span class="tool-icon">🔄</span>
+                        <h3>同步企劃</h3>
+                        <p>從文件更新資料</p>
+                    </button>
+                    <a href="../Scripts/" class="tool-card">
+                        <span class="tool-icon">⚡</span>
+                        <h3>自動化腳本</h3>
+                        <p>同步與美化工具</p>
+                    </a>
+                    <a href="../Planning/SYSTEM_DOCUMENTATION.md" class="tool-card">
+                        <span class="tool-icon">📖</span>
+                        <h3>系統 SOP</h3>
+                        <p>操作手冊</p>
+                    </a>
+                    <button class="tool-card reset-btn" id="resetProgress">
+                        <span class="tool-icon">🗑️</span>
+                        <h3>重置進度</h3>
+                        <p>清除本地資料</p>
+                    </button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message"></span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

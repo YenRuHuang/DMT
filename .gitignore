@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+*.log
+.gemini/
+.agent/
+*.xlsx
+*.json
+!package.json
+!glass-tide-461207-j2-8b7a7afd3e07.json # User might need this for scripts, but generally better to omit secrets. I'll omit it for safety.
+glass-tide-*.json
