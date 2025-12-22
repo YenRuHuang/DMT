@@ -46,6 +46,7 @@
 │   ├── 2025_12_Content_Calendar.xlsx    # 📅 內容行事曆
 │   ├── Post_Progress_Tracker.xlsx       # 📊 進度追蹤表
 │   ├── Google_Sheets_Setup_Guide.md     # 🔧 Google API 設定教學
+│   ├── AI_TOOLCHAIN_STANDARDS.md        # 🤖 AI 工具鏈版本規範 (Gemini 3 Pro)
 │   └── SYSTEM_DOCUMENTATION.md          # 📖 本文件
 │
 └── mursfoto-api-gateway-main/scripts/
