@@ -1,18 +1,66 @@
 const fs = require('fs');
 const path = require('path');
-const { google } = require('googleapis');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 // 使用共享設定模組
 const config = require('./config');
-const { MARKDOWN_FILE_PATH, GEMINI_API_KEY, OPENAI_API_KEY, BRANDS, FORBIDDEN_WORDS } = config;
+const { MARKDOWN_FILE_PATH, GEMINI_API_KEY, BRANDS, FORBIDDEN_WORDS } = config;
 
-// AI 模式選擇：優先 Gemini > OpenAI > Mock
-const AI_MODE = GEMINI_API_KEY ? 'gemini' : (OPENAI_API_KEY ? 'openai' : 'mock');
-console.log(`🤖 AI 模式: ${AI_MODE.toUpperCase()}`);
+// 初始化 Gemini Pro API
+if (!GEMINI_API_KEY) {
+  console.error('❌ 錯誤: 請設定 GEMINI_API_KEY 環境變數！');
+  console.log('   執行: export GEMINI_API_KEY="您的API金鑰"');
+  process.exit(1);
+}
+
+const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+
+console.log('🤖 AI 模式: GEMINI PRO (已啟用)');
+
+/**
+ * 使用 Gemini Pro 生成專業 B2B 文案
+ */
+async function callGeminiPro(brand, topic, type, format) {
+  const brandInfo = BRANDS[brand] || { keywords: [], emoji: '📝' };
+
+  const systemPrompt = `你是一位專業的醫美 B2B 社群行銷專家。你正在為「${brand}」品牌撰寫針對診所/醫師的專業貼文。
+
+## 品牌特色
+- 關鍵字: ${brandInfo.keywords.join('、')}
+- 情感調性: ${brand === 'P電漿' ? '科技、專業、臨床' : brand === '精靈聚雙璇' ? '夢幻、柔和、自然' : '高級、透明、質感'}
+
+## 規則
+1. 目標受眾是「診所/醫師/諮詢師」，不是一般消費者
+2. 強調「原廠賦能」、「臨床專業」、「技術優勢」
+3. 嚴禁使用: ${FORBIDDEN_WORDS.join('、')}
+4. 使用繁體中文
+5. 文案約 100-150 字，包含標題與正文
+
+## 輸出格式
+【標題】一句吸睛標題
+【正文】2-3 段專業內容
+【Hashtags】3-5 個相關標籤`;
+
+  const userPrompt = `請為以下貼文生成專業文案:
+- 品牌: ${brand}
+- 主題: ${topic}
+- 類型: ${type}
+- 格式: ${format}`;
+
+  try {
+    const result = await model.generateContent([systemPrompt, userPrompt]);
+    const response = await result.response;
+    return response.text();
+  } catch (error) {
+    console.error(`   ❌ Gemini API 錯誤: ${error.message}`);
+    return `[生成失敗] ${error.message}`;
+  }
+}
 
 async function generateCopy(rowNumber = null) {
   try {
-    console.log('🚀 開始生成文案...');
+    console.log('🚀 開始生成文案 (Gemini Pro)...\n');
 
     // 1. 讀取 Markdown 檔案
     const content = fs.readFileSync(MARKDOWN_FILE_PATH, 'utf8');
@@ -45,7 +93,6 @@ async function generateCopy(rowNumber = null) {
 
     // 3. 遍歷每一列 (或指定列)
     for (let i = 0; i < bodyLines.length; i++) {
-      // 如果指定了 rowNumber (1-based)，則只處理該列
       if (rowNumber !== null && (i + 1) !== rowNumber) {
         continue;
       }
@@ -53,7 +100,7 @@ async function generateCopy(rowNumber = null) {
       const line = bodyLines[i];
       const cells = line.split('|').map(c => c.trim()).filter((c, idx, arr) => idx > 0 && idx < arr.length - 1);
 
-      // 檢查是否已有文案 (避免覆蓋，除非強制？這裡先設定為若有內容則跳過)
+      // 檢查是否已有文案
       if (cells[copyIdx] && cells[copyIdx].length > 5) {
         console.log(`⚠️ 第 ${i + 1} 列已有文案，跳過。`);
         continue;
@@ -69,43 +116,28 @@ async function generateCopy(rowNumber = null) {
         continue;
       }
 
-      console.log(`🤖 正在為第 ${i + 1} 列生成文案...`);
-      console.log(`   - 品牌: ${brand}, 主題: ${topic}`);
+      console.log(`✨ 正在為第 ${i + 1} 列生成文案...`);
+      console.log(`   品牌: ${brand} | 主題: ${topic}`);
 
-      // 4. 呼叫 AI 生成文案
-      let generatedText = '';
-      if (MOCK_AI) {
-        generatedText = `[AI 生成] 這是針對 ${brand} 的 ${topic} 文案草稿。強調 ${type} 與 ${format} 的呈現方式。`;
-        await new Promise(r => setTimeout(r, 500)); // 模擬延遲
-      } else {
-        // 這裡實作 OpenAI API 呼叫
-        // const response = await openai.chat.completions.create({...})
-        // generatedText = response.choices[0].message.content;
-        console.log('⚠️ 請設定 OPENAI_API_KEY 以啟用真實 AI 生成。目前使用模擬模式。');
-        generatedText = `[AI 生成] 這是針對 ${brand} 的 ${topic} 文案草稿。`;
-      }
+      // 4. 呼叫 Gemini Pro API
+      const generatedText = await callGeminiPro(brand, topic, type, format);
 
-      // 5. 更新該列內容
-      // 注意：Markdown 表格的 cell 可能包含特殊字元，需處理換行
-      const cleanText = generatedText.replace(/\n/g, '<br>');
+      // 處理換行符號以適應 Markdown 表格
+      const cleanText = generatedText.replace(/\n/g, '<br>').substring(0, 500);
 
-      // 重新組裝該列
-      // 原始 line 分割後可能會有空白頭尾，需小心處理
-      // 簡單做法：直接替換文案欄位
-      // 但因為 split/join 可能會破壞格式，我們用 cells 陣列重組
       cells[copyIdx] = cleanText;
 
-      // 重組為 Markdown row
       const newRow = '| ' + cells.join(' | ') + ' |';
       updatedBodyLines[i] = newRow;
       updateCount++;
+
+      console.log(`   ✅ 完成！\n`);
     }
 
     if (updateCount > 0) {
-      // 6. 寫回檔案
       const newContent = content.replace(match[2].trim(), updatedBodyLines.join('\n'));
       fs.writeFileSync(MARKDOWN_FILE_PATH, newContent, 'utf8');
-      console.log(`✅ 已更新 ${updateCount} 筆文案到 Markdown 檔案。`);
+      console.log(`🎉 已更新 ${updateCount} 筆文案到 Markdown 檔案。`);
       console.log('💡 記得執行 node Scripts/sync-sheets.js 同步到 Google Sheets！');
     } else {
       console.log('ℹ️ 沒有需要更新的文案。');
@@ -116,7 +148,7 @@ async function generateCopy(rowNumber = null) {
   }
 }
 
-// 處理 CLI 參數
+// CLI 參數處理
 const args = process.argv.slice(2);
 if (args.includes('--all')) {
   generateCopy();
