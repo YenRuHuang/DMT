@@ -1,11 +1,17 @@
+/**
+ * 視覺看板後端伺服器
+ * 提供 API 接口和靜態文件服務
+ */
+
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const chokidar = require('chokidar');
+const config = require('../Scripts/config'); // 使用共享設定
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Enable CORS
 app.use(cors());
@@ -13,8 +19,8 @@ app.use(cors());
 // Serve static files from visual-board directory
 app.use(express.static(path.join(__dirname)));
 
-// Path to the strategy document
-const STRATEGY_FILE = path.join(__dirname, '..', 'Planning', 'Project_Requirements_Strategy.md');
+// Path to the strategy document (from config)
+const STRATEGY_FILE = path.join(config.PLANNING_DIR, 'Project_Requirements_Strategy.md');
 
 // Cache for parsed strategy data
 let strategyCache = null;
@@ -23,10 +29,15 @@ let lastModified = null;
 // Parse strategy markdown file
 function parseStrategyFile() {
   try {
+    if (!fs.existsSync(STRATEGY_FILE)) {
+      console.warn(`⚠️ Strategy file not found: ${STRATEGY_FILE}`);
+      return null;
+    }
+
     const content = fs.readFileSync(STRATEGY_FILE, 'utf-8');
     const stats = fs.statSync(STRATEGY_FILE);
 
-    // Extract data from markdown
+    // Extract data from markdown (This is a simplified parser, ideally would be more robust)
     const data = {
       goals: [
         {
@@ -81,7 +92,7 @@ function parseStrategyFile() {
     const themeMatch = content.match(/##?\s*(.+?主題.*?)\n/);
     if (themeMatch) {
       // Could enhance parsing here to extract actual theme from markdown
-      console.log('Found theme section in markdown');
+      // console.log('Found theme section in markdown');
     }
 
     strategyCache = data;
@@ -100,22 +111,33 @@ function parseStrategyFile() {
 parseStrategyFile();
 
 // Watch for file changes
-const watcher = chokidar.watch(STRATEGY_FILE, {
-  persistent: true,
-  ignoreInitial: true
-});
+try {
+  const watcher = chokidar.watch(STRATEGY_FILE, {
+    persistent: true,
+    ignoreInitial: true
+  });
 
-watcher.on('change', () => {
-  console.log('📝 Strategy file changed, reloading...');
-  parseStrategyFile();
-});
+  watcher.on('change', () => {
+    console.log('📝 Strategy file changed, reloading...');
+    parseStrategyFile();
+  });
+} catch (error) {
+  console.error('⚠️ Could not setup file watcher (likely due to environment limitations):', error.message);
+}
 
 // API endpoint
 app.get('/api/strategy', (req, res) => {
   if (!strategyCache) {
-    return res.status(500).json({ error: 'Strategy data not available' });
+    // Try to parse again
+    parseStrategyFile();
+    if (!strategyCache) {
+       // Return default/mock data if file parsing fails (for resilience)
+       return res.json({
+          theme: { title: '載入中...', subtitle: '', description: '無法讀取策略文件' },
+          lastUpdated: new Date().toISOString()
+       });
+    }
   }
-
   res.json(strategyCache);
 });
 
@@ -134,5 +156,5 @@ app.listen(PORT, () => {
   console.log(`📍 網址: http://localhost:${PORT}`);
   console.log(`📋 API: http://localhost:${PORT}/api/strategy`);
   console.log(`👁️  監測文件: ${STRATEGY_FILE}`);
-  console.log('\n按 Ctrl+C 停止伺服器\n');
+  // console.log('\n按 Ctrl+C 停止伺服器\n');
 });
