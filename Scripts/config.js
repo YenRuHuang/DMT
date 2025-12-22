@@ -29,10 +29,10 @@ module.exports = {
   // === Google Slides 設定 ===
   SLIDES_ID: '13sQCCsWMCvYFd9ymU0V5raRY0swLERybFz2ic6CTvcA',
 
-  // === AI API 設定 ===
-  // 優先使用 Gemini API，若無則使用 OpenAI
-  GEMINI_API_KEY: process.env.GEMINI_API_KEY || null,
-  OPENAI_API_KEY: process.env.OPENAI_API_KEY || null,
+  // === AI 模式 ===
+  // 本專案使用 AI Pro (Gemini 3 Pro) 透過 Workspace Studio 進行文案生成
+  // 不再使用 API Key，所有 AI 功能透過雲端 Agent 執行
+  AI_MODE: 'AI_PRO_WORKSPACE_STUDIO',
 
   // === 品牌資訊 ===
   BRANDS: {

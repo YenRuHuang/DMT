@@ -65,17 +65,13 @@ async function runHealthCheck() {
     failed++;
   }
 
-  // === 4. 檢查 AI API Key ===
-  console.log('\n🤖 [4/4] 檢查 AI API 金鑰...');
-  if (config.GEMINI_API_KEY) {
-    console.log('   ✅ GEMINI_API_KEY 已設定');
-    passed++;
-  } else if (config.OPENAI_API_KEY) {
-    console.log('   ⚠️ GEMINI_API_KEY 未設定，將使用 OPENAI_API_KEY');
+  // === 4. 檢查 AI 模式 ===
+  console.log('\n🤖 [4/4] 檢查 AI 模式...');
+  if (config.AI_MODE === 'AI_PRO_WORKSPACE_STUDIO') {
+    console.log('   ✅ AI Pro 模式 (Gemini 3 Pro via Workspace Studio)');
     passed++;
   } else {
-    console.log('   ⚠️ 沒有 AI API 金鑰，將使用 Mock 模式 (建議設定 GEMINI_API_KEY)');
-    // 不算失敗，只是警告
+    console.log('   ⚠️ AI 模式未設定，請檢查 config.js');
   }
 
   // === 總結 ===
