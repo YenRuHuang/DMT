@@ -99,9 +99,12 @@
 
 *   `sync-sheets.js`: **同步腳本**。讀取 Markdown 表格並更新到 Google Sheets。
 *   `sync-slides.js`: **簡報同步腳本**。更新 Google Slides 標題與內容。
-*   `generate-copy.js`: **文案生成腳本**。自動為貼文生成文案草稿。
+*   `health-check.js`: **健康檢查腳本**。驗證系統連線與設定狀態。
+*   `config.js`: **共享設定模組**。集中管理所有路徑與 ID。
 *   `format-sheets.js`: **格式化腳本**。設定 Google Sheets 的欄寬、凍結窗格等。
 *   `add-status-dropdowns.js`: **下拉選單腳本**。為狀態欄位加入下拉選單。
+
+> **⚠️ 文案生成**：請使用 **Google Workspace Studio Agent (AI Pro)** 進行文案生成，以使用最新的 Gemini 3 Pro 模型。
 
 ---
 
