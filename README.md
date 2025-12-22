@@ -2,11 +2,17 @@
 
 A comprehensive system for managing social media content for medical aesthetics brands (P-Plasma, AestheFill, Hera). This project integrates Google Workspace automation, local Node.js scripts, and a web-based visual dashboard to streamline content creation, planning, and tracking.
 
+> **🆕 Latest Updates (2025-12)**
+> - ✅ Integrated with **AI Pro (Gemini 3 Pro, Veo 3.1, Nano Banana)**
+> - ✅ Express 5 compatibility
+> - ✅ Unified utils.js logger module
+> - ✅ Jules AI code quality refactoring
+
 ## 🚀 Features
 
 *   **Visual Board**: A web-based dashboard to monitor monthly goals, visual identity, and content progress.
 *   **Automation Scripts**: Node.js scripts to sync local Markdown planning files with Google Sheets and Google Slides.
-*   **AI Integration**: Defined workflows for AI agents to generate copy, visuals, and strategies.
+*   **AI Pro Integration**: Leverages Gemini 3 Pro for copy, Veo 3.1 for video, Nano Banana for images.
 *   **Centralized Planning**: A set of Markdown files in the `Planning/` directory that serves as the single source of truth.
 
 ## 📂 Repository Structure
