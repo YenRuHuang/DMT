@@ -75,7 +75,7 @@
 **用途**：AI 團隊角色與工作流程  
 **內容**：
 - 5 大 AI 角色定義
-- 各角色使用的工具（Perplexity Pro, Google Veo 3, Nano Banana）
+- 各角色使用的工具（Perplexity Pro, Google Veo 3.1, Nano Banana）
 - 月度/週度工作流程
 - 執行指令範例（B2B 導向）
 

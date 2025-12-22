@@ -22,7 +22,7 @@
 | 用途 | 工具 | **指定版本** | 備註 |
 |:---|:---|:---|:---|
 | **靜態圖片** | Nano Banana | **最新版本** | AI Pro 訂閱包含 |
-| **短影音/動態** | Google Veo | **Veo 3** | AI Pro 訂閱包含 |
+| **短影音/動態** | Google Veo | **Veo 3.1** | AI Pro 訂閱包含 |
 | **圖片編輯** | Imagen | **Imagen 3** | AI Pro 訂閱包含 |
 
 ---
@@ -54,7 +54,7 @@
 
 - [ ] 所有文案由 Workspace Studio Agent (Gemini 3 Pro) 生成
 - [ ] 所有圖片提示詞標註使用 Nano Banana (最新版)
-- [ ] 所有影片提示詞標註使用 Google Veo 3
+- [ ] 所有影片提示詞標註使用 Google Veo 3.1
 - [ ] 所有趨勢研究使用 Perplexity Pro
 - [ ] 程式碼重構任務指派給 Jules (Gemini 3 Pro)
 - [ ] 不存在任何 API Key 呼叫的本地腳本
