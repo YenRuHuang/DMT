@@ -18,6 +18,7 @@ async function test() {
     console.log("Capabilities:", JSON.stringify(folder.data.capabilities, null, 2));
   } catch (e) {
     console.error("Folder access error:", e.message);
+    process.exit(1);
   }
 
   // Try to get one image's permissions
@@ -44,6 +45,7 @@ async function test() {
       console.log("✅ Cleaned up test copy.");
     } catch (e) {
       console.error("\n❌ Copy approach failed:", e.message);
+      process.exit(1);
     }
   }
 }

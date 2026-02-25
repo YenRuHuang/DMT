@@ -47,6 +47,7 @@ async function inspectSlides() {
 
   } catch (error) {
     console.error('❌ 檢查失敗:', error.message);
+    process.exit(1);
   }
 }
 

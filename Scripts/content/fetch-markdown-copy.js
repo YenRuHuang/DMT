@@ -96,6 +96,7 @@ async function checkInternal() {
       console.log("Dumped mapped copy to Scripts/debug_copy.json");
   } catch (e) {
       console.error(e);
+    process.exit(1);
   }
 }
 checkInternal();

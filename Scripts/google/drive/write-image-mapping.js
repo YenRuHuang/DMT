@@ -127,4 +127,7 @@ async function writeMapping() {
   console.log(`   Pending: ${notMatched.length} images still needed`);
 }
 
-writeMapping();
+writeMapping().catch(err => {
+  console.error('❌ 錯誤:', err.message);
+  process.exit(1);
+});

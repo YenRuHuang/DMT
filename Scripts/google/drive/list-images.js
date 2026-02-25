@@ -36,6 +36,7 @@ async function listAllImages() {
     }
   } catch (err) {
     console.error('Error:', err);
+    process.exit(1);
   }
 }
 listAllImages();

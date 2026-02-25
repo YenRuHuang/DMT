@@ -138,4 +138,5 @@ try {
 
 } catch (e) {
   console.error('Error exporting CSV:', e);
+  process.exit(1);
 }

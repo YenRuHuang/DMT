@@ -40,6 +40,7 @@ async function readSlides() {
     console.log('Saved to Output/Rewritten_Copy_Analysis.txt');
   } catch (err) {
     console.error('Error reading slides:', err);
+    process.exit(1);
   }
 }
 

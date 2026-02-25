@@ -134,6 +134,7 @@ async function syncPartnerStatus() {
 
       } catch (err) {
         console.warn(`跳過分頁 ${sheetName}: ${err.message}`);
+        process.exit(1);
       }
     }
 
@@ -141,6 +142,7 @@ async function syncPartnerStatus() {
 
   } catch (error) {
     console.error('❌ 同步失敗:', error.message);
+    process.exit(1);
   }
 }
 

@@ -333,6 +333,7 @@ async function syncAllContent() {
         if (!fmtErr.message.includes('overlaps')) {
           console.error('   ⚠️ Formatting Error:', fmtErr.message);
         }
+        process.exit(1);
       }
       console.log(`   ✅ 處理完成`);
     }
@@ -341,6 +342,7 @@ async function syncAllContent() {
 
   } catch (e) {
     console.error('❌ Sync Failed:', e);
+    process.exit(1);
   }
 }
 

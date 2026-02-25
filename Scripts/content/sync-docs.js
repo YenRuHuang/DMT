@@ -148,6 +148,7 @@ https://docs.google.com/spreadsheets/d/1Qvh58taqZD-q30FLO3wRKm6htsZ4Muy2lUlCJFlc
       console.log('   請將文件分享給服務帳戶：');
       console.log('   (查看 credentials JSON 中的 client_email)');
     }
+    process.exit(1);
   }
 }
 

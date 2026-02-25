@@ -50,6 +50,7 @@ async function listAllImages() {
 
   } catch (e) {
     console.error('❌ 錯誤:', e.message);
+    process.exit(1);
   }
 }
 

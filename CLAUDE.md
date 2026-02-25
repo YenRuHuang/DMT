@@ -49,6 +49,45 @@
 
 ---
 
+## 換月流程（每月 8 日後執行）
+
+**換月只需改 `.env` 兩個值**，其餘全部自動對應：
+
+```bash
+# .env 換月設定（以 3 月為例）
+CURRENT_CYCLE=2026_03
+CURRENT_SHEET_NAME=Month3_排程
+```
+
+### 自動生效的項目
+
+| 設定 | 自動對應值（以 2026_03 為例） |
+|------|-------------------------------|
+| `MARKDOWN_FILE_PATH` | `Planning/2026_03_Cycle/Final_Proposal_Submission_2026_03.md` |
+| `SHEET_NAME` | `Month3_排程` |
+| 健康檢查標籤 | `Final_Proposal_Submission_2026_03.md` |
+| Slides 標題 | `2026_03_曜亞X默默的社群經營 - B2B 專業提案` |
+
+### 換月步驟
+
+```bash
+# 1. 更新 .env（只改這兩行）
+CURRENT_CYCLE=2026_03
+CURRENT_SHEET_NAME=Month3_排程
+
+# 2. 建立新月份的企劃目錄
+mkdir -p Planning/2026_03_Cycle
+
+# 3. 驗證設定無誤
+npm run health
+
+# 4. 確認健康檢查 4/4 通過後即可開始執行
+```
+
+> ⚠️ **注意**：換月前請確認新月份的 Markdown 企劃文件與 Google Sheets 分頁已建立，否則 `npm run health` 會提示找不到檔案。
+
+---
+
 ## 腳本目錄結構
 
 ```
@@ -99,8 +138,8 @@ npm run deploy        # 部署至 Zeabur
 
 ### 共同讀取的檔案
 - `CLAUDE.md`（本文件，兩者自動載入）
-- `Planning/2026_02_Cycle/Final_Proposal_Submission_2026_02.md`（當月排程）
-- `Scripts/config.js`（系統設定）
+- `Planning/{CURRENT_CYCLE}_Cycle/Final_Proposal_Submission_{CURRENT_CYCLE}.md`（當月排程，路徑由 `.env` 的 `CURRENT_CYCLE` 決定）
+- `Scripts/config.js`（系統設定，讀取 `.env`）
 - `Planning/Master_Command_Center.md`（核心控制中心）
 
 ---
@@ -118,6 +157,7 @@ npm run deploy        # 部署至 Zeabur
 從**專案目錄**啟動 Claude Code，CLAUDE.md 會自動載入：
 
 ```bash
-cd ~/Documents/曜亞X默默的社群經營
-claude
+cd ~/Documents/曜亞X默默的社群經營 && claude
 ```
+
+> **換月時的完整流程**：更新 `.env` → `npm run health` → `npm run sync:all`

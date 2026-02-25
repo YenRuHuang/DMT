@@ -20,6 +20,7 @@ async function fetchW2() {
     w2Missing.forEach(r => console.log(`${r[1]} | ${r[2]} | ${r[3]} | ${r[5]} | ${r[7]}`));
   } catch (err) {
     console.error('Error:', err);
+    process.exit(1);
   }
 }
 fetchW2();

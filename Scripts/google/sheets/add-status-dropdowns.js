@@ -74,6 +74,7 @@ async function addStatusDropdowns() {
     if (error.response) {
       console.error('詳細錯誤:', JSON.stringify(error.response.data, null, 2));
     }
+    process.exit(1);
   }
 }
 

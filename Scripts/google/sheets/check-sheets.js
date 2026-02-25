@@ -14,6 +14,7 @@ async function checkSheets() {
     metaRes.data.sheets.forEach(s => console.log(`- ${s.properties.title}`));
   } catch (err) {
     console.error('Error:', err);
+    process.exit(1);
   }
 }
 checkSheets();

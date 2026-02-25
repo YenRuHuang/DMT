@@ -162,6 +162,7 @@ async function fixComplianceIssues() {
       console.log('   你可以在 Google Slides 中把這個服務帳戶加入共編：');
       console.log('   glass-tide-461207-j2@glass-tide-461207-j2.iam.gserviceaccount.com');
     }
+    process.exit(1);
   }
 }
 

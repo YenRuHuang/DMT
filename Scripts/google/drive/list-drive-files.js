@@ -20,6 +20,7 @@ async function listFiles() {
       console.log(`❌ Cannot access folder: ${e.message}`);
       console.log('Please share the folder "10NEHiEhHv8_..." with: mursfoto-sheets-sync@glass-tide-461207-j2.iam.gserviceaccount.com');
       return;
+      process.exit(1);
     }
 
     // List files
@@ -55,6 +56,7 @@ async function listFiles() {
 
   } catch (e) {
     console.log('GLOABL ERROR: ' + e.message);
+    process.exit(1);
   }
 }
 

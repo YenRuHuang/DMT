@@ -312,6 +312,7 @@ async function generateContentSlides() {
     if (e.response) {
       console.error('詳細錯誤:', JSON.stringify(e.response.data, null, 2));
     }
+    process.exit(1);
   }
 }
 

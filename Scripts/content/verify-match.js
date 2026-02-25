@@ -57,4 +57,7 @@ async function verify() {
     console.log(`Slide ${slideNum}: ${dateStr} ${brand} [${format}] → ${matchName}${oldMatch ? ` (舊圖 ${oldMatch[1]}/${oldMatch[2]})` : ''}`);
   }
 }
-verify();
+verify().catch(err => {
+  console.error('❌ 錯誤:', err.message);
+  process.exit(1);
+});

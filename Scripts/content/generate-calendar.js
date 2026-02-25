@@ -1,6 +1,12 @@
 const fs = require('fs');
 const config = require('../config'); // Ensure we use the shared config
 
+// 確保同步執行時的錯誤也能正確回傳非零 exit code
+process.on('uncaughtException', (err) => {
+  console.error('❌ 行事曆產生失敗:', err.message);
+  process.exit(1);
+});
+
 // Quotas (Total Needed - Already Done)
 // Neuramis: 6P, 10S, 2R
 // Cooltech: 6P, 10S, 2R

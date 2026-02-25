@@ -33,6 +33,7 @@ async function readBoth() {
     }
   } catch (e) {
     console.error("Old sheet error:", e.message);
+    process.exit(1);
   }
 
   // 2. 當前試算表 — 主排程
@@ -49,6 +50,7 @@ async function readBoth() {
     console.log("First 5 rows:", res.data.values?.length);
   } catch (e) {
     console.error("Current sheet error:", e.message);
+    process.exit(1);
   }
 
   // 3. List current Drive images with full paths

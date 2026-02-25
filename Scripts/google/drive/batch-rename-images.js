@@ -53,6 +53,7 @@ async function batchRename() {
       }
     } catch (e) {
       console.error(`Error traversing: ${e.message}`);
+      process.exit(1);
     }
   }
   await traverse(IMAGE_FOLDER_ID);
@@ -135,6 +136,7 @@ async function batchRename() {
       console.log(`  ✅ ${op.oldName} → ${op.newName}`);
     } catch (e) {
       console.error(`  ❌ ${op.oldName}: ${e.message}`);
+      process.exit(1);
     }
   }
   console.log(`\nRenamed ${successCount}/${renameOps.length} images.\n`);
