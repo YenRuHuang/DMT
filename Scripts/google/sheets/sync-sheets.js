@@ -420,7 +420,11 @@ async function syncSheets() {
     if (error.response) {
       console.error('詳細錯誤:', JSON.stringify(error.response.data, null, 2));
     }
+    process.exit(1);
   }
 }
 
-syncSheets();
+syncSheets().catch(err => {
+  console.error('❌ 未預期錯誤:', err.message);
+  process.exit(1);
+});

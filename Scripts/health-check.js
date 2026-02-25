@@ -25,7 +25,7 @@ async function runHealthCheck() {
   logger.info('📁 [1/4] 檢查關鍵檔案...');
 
   const criticalFiles = [
-    { name: 'Final_Proposal_Submission_2026_02.md', path: config.MARKDOWN_FILE_PATH },
+    { name: `Final_Proposal_Submission_${config.CURRENT_CYCLE}.md`, path: config.MARKDOWN_FILE_PATH },
     { name: 'Google Credentials JSON', path: config.CREDENTIALS_PATH },
     { name: 'package.json', path: path.join(config.PROJECT_ROOT, 'package.json') },
   ];
@@ -74,7 +74,8 @@ async function runHealthCheck() {
     logger.success('   AI Pro 模式 (Gemini 3 Pro via Workspace Studio)');
     passed++;
   } else {
-    logger.warn('   AI 模式未設定，請檢查 config.js');
+    logger.error('   AI 模式未設定，請檢查 config.js');
+    failed++;
   }
 
   // === 總結 ===
@@ -92,9 +93,12 @@ async function runHealthCheck() {
 }
 
 if (require.main === module) {
-  runHealthCheck().then(success => {
-    process.exit(success ? 0 : 1);
-  });
+  runHealthCheck()
+    .then(success => process.exit(success ? 0 : 1))
+    .catch(err => {
+      logger.error(`健康檢查發生未預期錯誤: ${err.message}`);
+      process.exit(1);
+    });
 }
 
 module.exports = runHealthCheck;

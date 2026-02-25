@@ -23,24 +23,18 @@ async function syncPresentation() {
     const slides = google.slides({ version: 'v1', auth });
     const drive = google.drive({ version: 'v3', auth });
 
-    // 1. 讀取本地策略文件
-    console.log('📖 讀取策略文件...');
-    let strategyContent = '';
-    if (fs.existsSync(STRATEGY_FILE_PATH)) {
-      strategyContent = fs.readFileSync(STRATEGY_FILE_PATH, 'utf8');
-      const lines = strategyContent.split('\n');
-      strategyContent = lines.slice(0, 20).join('\n');
-    } else {
-      strategyContent = '策略文件同步測試\nB2B 專業轉型計畫';
+    // 1. 確認策略文件存在（僅警告，不中斷）
+    if (!fs.existsSync(STRATEGY_FILE_PATH)) {
+      console.warn(`⚠️  找不到策略文件: ${STRATEGY_FILE_PATH}`);
+      console.warn('   簡報標題將使用當月週期識別碼，請確認文件路徑是否正確。');
     }
 
-    // 2. 更新簡報標題
-    console.log('📝 更新簡報標題...');
+    // 2. 更新簡報標題（動態帶入當月週期，換月只需更新 .env）
+    const slideTitle = `${config.CURRENT_CYCLE}_曜亞X默默的社群經營 - B2B 專業提案`;
+    console.log(`📝 更新簡報標題為：${slideTitle}`);
     await drive.files.update({
       fileId: PRESENTATION_ID,
-      requestBody: {
-        name: '2026_01_曜亞X默默的社群經營 - B2B 專業提案'
-      }
+      requestBody: { name: slideTitle }
     });
     console.log('✅ 標題已更新');
 
@@ -53,7 +47,14 @@ async function syncPresentation() {
 
   } catch (error) {
     console.error('❌ 同步失敗:', error.message);
+    if (error.response) {
+      console.error('詳細錯誤:', JSON.stringify(error.response.data, null, 2));
+    }
+    process.exit(1);
   }
 }
 
-syncPresentation();
+syncPresentation().catch(err => {
+  console.error('❌ 未預期錯誤:', err.message);
+  process.exit(1);
+});

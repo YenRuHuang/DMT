@@ -11,3 +11,5 @@ glass-tide-*.json
 token.json
 # gemini-discord-bot 是獨立 git repo，不納入主專案追蹤
 gemini-discord-bot/
+# Output/ 為產出的暫存內容，不納入版本控制
+Output/

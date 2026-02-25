@@ -20,7 +20,7 @@ if (!fs.existsSync(envPath)) {
 require('dotenv').config({ path: envPath });
 
 // 驗證必要的環境變數
-const REQUIRED_ENV = ['CREDENTIALS_PATH', 'SPREADSHEET_ID', 'INTERNAL_SPREADSHEET_ID', 'SLIDES_ID', 'IMAGE_FOLDER_ID'];
+const REQUIRED_ENV = ['CREDENTIALS_PATH', 'SPREADSHEET_ID', 'INTERNAL_SPREADSHEET_ID', 'SLIDES_ID', 'IMAGE_FOLDER_ID', 'CURRENT_CYCLE', 'CURRENT_SHEET_NAME'];
 const missing = REQUIRED_ENV.filter(key => !process.env[key]);
 if (missing.length > 0) {
   console.error(`❌ 缺少必要的環境變數：${missing.join(', ')}\n   請檢查 .env 檔案。`);
@@ -38,8 +38,15 @@ module.exports = {
   /** 輸出/報告目錄 (如果有的話) */
   OUTPUT_DIR: path.join(PROJECT_ROOT, 'Output'),
 
-  // 核心文件 - 當月排程來源（每月更新此路徑）
-  MARKDOWN_FILE_PATH: path.join(PROJECT_ROOT, 'Planning', '2026_02_Cycle', 'Final_Proposal_Submission_2026_02.md'),
+  // 當月週期識別碼（從 .env 讀取，格式 YYYY_MM，例如 2026_02）
+  CURRENT_CYCLE: process.env.CURRENT_CYCLE,
+
+  // 核心文件 - 當月排程來源（從 CURRENT_CYCLE 動態組合，換月只需改 .env）
+  MARKDOWN_FILE_PATH: path.join(
+    PROJECT_ROOT, 'Planning',
+    `${process.env.CURRENT_CYCLE}_Cycle`,
+    `Final_Proposal_Submission_${process.env.CURRENT_CYCLE}.md`
+  ),
 
   // === Google API 憑證與試算表設定 ===
   CREDENTIALS_PATH: path.resolve(PROJECT_ROOT, process.env.CREDENTIALS_PATH),
@@ -49,7 +56,8 @@ module.exports = {
 
   SPREADSHEET_ID: process.env.SPREADSHEET_ID,
   INTERNAL_SPREADSHEET_ID: process.env.INTERNAL_SPREADSHEET_ID,
-  SHEET_NAME: process.env.SHEET_NAME || 'Month2_排程',
+  // Google Sheets 分頁名稱（從 .env 讀取 CURRENT_SHEET_NAME，換月只需改 .env）
+  SHEET_NAME: process.env.CURRENT_SHEET_NAME,
 
   DEFAULT_SHEET_ID: 0,
 
