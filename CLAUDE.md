@@ -56,7 +56,7 @@
 ```bash
 # .env 換月設定（以 3 月為例）
 CURRENT_CYCLE=2026_03
-CURRENT_SHEET_NAME=Month3_排程
+CURRENT_SHEET_NAME=2026_03_排程
 ```
 
 ### 自動生效的項目
@@ -64,16 +64,18 @@ CURRENT_SHEET_NAME=Month3_排程
 | 設定 | 自動對應值（以 2026_03 為例） |
 |------|-------------------------------|
 | `MARKDOWN_FILE_PATH` | `Planning/2026_03_Cycle/Final_Proposal_Submission_2026_03.md` |
-| `SHEET_NAME` | `Month3_排程` |
+| `SHEET_NAME` | `2026_03_排程` |
 | 健康檢查標籤 | `Final_Proposal_Submission_2026_03.md` |
 | Slides 標題 | `2026_03_曜亞X默默的社群經營 - B2B 專業提案` |
+| `sync-partner-status.js` | 前月 `2026_02_排程` + 本月 `2026_03_排程`（`getPreviousCycle` 自動計算） |
+| `sync-content-details.js` | 前月 `Planning/2026_02_Cycle` + 本月 `Planning/2026_03_Cycle`（自動計算） |
 
 ### 換月步驟
 
 ```bash
 # 1. 更新 .env（只改這兩行）
 CURRENT_CYCLE=2026_03
-CURRENT_SHEET_NAME=Month3_排程
+CURRENT_SHEET_NAME=2026_03_排程
 
 # 2. 建立新月份的企劃目錄
 mkdir -p Planning/2026_03_Cycle
@@ -93,7 +95,7 @@ npm run health
 ```
 Scripts/
 ├── config.js           # 集中設定，讀取 .env（所有腳本的入口）
-├── utils.js            # logger、handleError
+├── utils.js            # logger、handleError、getSheetsClient/getDriveClient/getSlidesClient、getPreviousCycle
 ├── health-check.js     # npm run health
 ├── google/
 │   ├── sheets/         # sync-sheets.js、format-sheets.js、audit-sheets.js 等
@@ -112,13 +114,25 @@ Scripts/
 ## npm 快捷指令
 
 ```bash
+# 核心指令
 npm run health        # 系統健康檢查（4 項目）
-npm run board         # 啟動 Visual Board (localhost:3000)
 npm run sync:all      # 同步 Sheets + Slides
 npm run sync:sheets   # 只同步 Sheets
 npm run sync:slides   # 只同步 Slides
 npm run calendar      # 產出行事曆
+npm run board         # 啟動 Visual Board (localhost:3000)
 npm run deploy        # 部署至 Zeabur
+
+# 資料庫
+npm run setup:db      # 初始化資料庫
+npm run diagnose:db   # 診斷資料庫狀態
+
+# 內容驗證
+npm run write:mapping # 寫入圖片映射至 Sheets
+npm run verify:match  # 驗證圖片與排程對應
+
+# 部署檢查
+npm run check:deploy  # 確認部署狀態
 ```
 
 ---
