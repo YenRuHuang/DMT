@@ -4,8 +4,13 @@
   "description": "Social media management automation scripts",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "board": "node visual-board/server.js"
+    "board": "node visual-board/server.js",
+    "health": "node Scripts/health-check.js",
+    "sync:sheets": "node Scripts/google/sheets/sync-sheets.js",
+    "sync:slides": "node Scripts/google/slides/sync-slides.js",
+    "sync:all": "npm run sync:sheets && npm run sync:slides",
+    "calendar": "node Scripts/content/generate-calendar.js",
+    "deploy": "node Scripts/deploy/mursfoto-deploy.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +20,7 @@
     "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
     "cors": "^2.8.5",
+    "dotenv": "^17.3.1",
     "express": "^4.18.2",
     "googleapis": "^167.0.0"
   }

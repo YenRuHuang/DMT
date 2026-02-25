@@ -2,13 +2,15 @@
 
 > **DMT (Digital Marketing Tools)** - 曜亞生醫 × 默默網路行銷 合作專案
 
-針對三大醫美品牌 (P-Plasma, AestheFill, Hera) 的 B2B 社群內容管理系統。
+針對 2026 三大重點品牌 (**Neuramis 仙女玻尿酸**, **Cooltech Define 酷特冷凍減脂**, **LPG Infinity 法式體雕**) 的 B2B 社群內容管理系統。
 
-## 🆕 最新更新 (2025-12)
+## 🆕 最新更新 (2026-02)
 
-- ✅ 整合 **AI Pro** (Gemini 3 Pro, Veo 3.1, Nano Banana)
-- ✅ Express 5 + 安全漏洞修復
-- ✅ Jules AI 程式碼品質重構
+- ✅ **安全強化**：敏感設定移至 `.env`，移除硬寫路徑
+- ✅ **腳本重整**：Scripts/ 依功能分層（google/sheets、slides、drive、content 等）
+- ✅ **npm scripts**：`npm run sync:all`、`npm run health` 等快捷指令
+- ✅ **品牌轉型**：全面支援 Neuramis, Cooltech Define, LPG Infinity
+- ✅ **整合 AI Pro** (Gemini 3 Pro, Veo 3.1, Nano Banana)
 
 ---
 
@@ -26,18 +28,25 @@
 ## 📂 專案結構
 
 ```
-├── Planning/                # 策略文件、AI 工作流程
+├── Planning/                     # 策略文件、AI 工作流程
 │   ├── Master_Command_Center.md  # 核心控制中心
 │   ├── AI_Team_Workflow.md       # AI 團隊角色與提示詞
-│   └── ...
-├── Scripts/                 # Node.js 自動化腳本
-│   ├── sync-sheets.js       # 同步到 Google Sheets
-│   ├── sync-slides.js       # 同步到 Google Slides
-│   └── health-check.js      # 系統健康檢查
-├── visual-board/            # 網頁儀表板
-│   ├── server.js
-│   └── index.html
-└── package.json
+│   └── 2026_02_Cycle/            # 本月週期企劃
+├── Scripts/                      # Node.js 自動化腳本
+│   ├── config.js                 # ⚙️ 集中設定（讀取 .env）
+│   ├── utils.js                  # 共用工具（logger）
+│   ├── health-check.js           # 系統健康檢查
+│   ├── google/
+│   │   ├── sheets/               # Sheets 同步、格式化、稽核
+│   │   ├── slides/               # Slides 同步、生成、修正
+│   │   └── drive/                # Drive 檔案、圖片管理
+│   ├── content/                  # 文案、行事曆、Markdown 處理
+│   ├── ai/                       # AI 工具（Flux 圖片生成）
+│   ├── deploy/                   # 部署、Token 管理
+│   └── database/                 # 資料庫設定與診斷
+├── Output/                       # 產出文案與排程
+├── visual-board/                 # 網頁儀表板
+└── .env                          # 🔒 環境變數（不進 git）
 ```
 
 ---
@@ -48,14 +57,24 @@
 # 安裝相依套件
 npm install
 
+# 複製環境變數範本並填入實際值
+cp .env.example .env
+
+# 系統健康檢查
+npm run health
+
 # 啟動 Visual Board (http://localhost:3000)
 npm run board
 
-# 同步到 Google Sheets
-node Scripts/sync-sheets.js
+# 同步全部（Sheets + Slides）
+npm run sync:all
 
-# 系統健康檢查
-node Scripts/health-check.js
+# 分開同步
+npm run sync:sheets
+npm run sync:slides
+
+# 產出行事曆
+npm run calendar
 ```
 
 ---

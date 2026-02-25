@@ -3,8 +3,8 @@
  * 為指定工作表的第一列新增篩選器
  */
 
-const config = require('./config');
-const { getSheetsClient, runScript, logger } = require('./utils');
+const config = require('../../config');
+const { getSheetsClient, runScript, logger } = require('../../utils');
 
 async function addFilters() {
   logger.info('🚀 開始新增篩選功能...');
@@ -52,7 +52,7 @@ async function addFilters() {
 
   logger.success('篩選功能已新增！');
   logger.info('📌 現在您可以在標題列看到篩選圖示，點擊即可篩選：');
-  logger.info('   - 品牌：P電漿 / 精靈聚雙璇 / Hera');
+  logger.info('   - 品牌：Neuramis / Cooltech / LPG');
   logger.info('   - 類型：知識性 / 生活類 / 互動型...等');
   logger.info('   - 格式：貼文 / 限動 / 短影音');
   logger.info('   - 狀態：待辦 / 進行中 / 完成...等');

@@ -1,8 +1,9 @@
 const { google } = require('googleapis');
+const config = require('../../config');
 
 // 設定
-const CREDENTIALS_PATH = '/Users/murs/Documents/曜亞X默默的社群經營/glass-tide-461207-j2-8b7a7afd3e07.json';
-const SPREADSHEET_ID = '1Qvh58taqZD-q30FLO3wRKm6htsZ4Muy2lUlCJFlc4p8';
+const CREDENTIALS_PATH = config.CREDENTIALS_PATH;
+const SPREADSHEET_ID = config.SPREADSHEET_ID;
 const NEW_SHEET_ID = 206607254;
 
 async function addStatusDropdowns() {

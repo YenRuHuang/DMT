@@ -59,7 +59,7 @@ node scripts/generate-presentation.js --month 2026-01
 1. **封面** - 自動填入月份與日期
 2. **專案概覽** - 從 `Project_Requirements_Strategy.md` 讀取
 3. **品牌策略** - 三個品牌的核心訊息
-4. **內容規劃** - 從 `2025_12_Content_Calendar.xlsx` 讀取
+4. **內容規劃** - 從 `2026_01_Content_Calendar.xlsx` 讀取
 5. **視覺參考** - 插入 `Tone_and_Manner_Visuals.md` 的圖片
 6. **執行時程** - 從進度追蹤表生成
 

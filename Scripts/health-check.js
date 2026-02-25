@@ -25,7 +25,7 @@ async function runHealthCheck() {
   logger.info('📁 [1/4] 檢查關鍵檔案...');
 
   const criticalFiles = [
-    { name: 'Master_Command_Center.md', path: config.MARKDOWN_FILE_PATH },
+    { name: 'Final_Proposal_Submission_2026_02.md', path: config.MARKDOWN_FILE_PATH },
     { name: 'Google Credentials JSON', path: config.CREDENTIALS_PATH },
     { name: 'package.json', path: path.join(config.PROJECT_ROOT, 'package.json') },
   ];

@@ -1,10 +1,12 @@
 const { google } = require('googleapis');
 const fs = require('fs');
+const path = require('path');
+const config = require('../../config');
 
 // 設定
-const CREDENTIALS_PATH = '/Users/murs/Documents/曜亞X默默的社群經營/glass-tide-461207-j2-8b7a7afd3e07.json';
-const PRESENTATION_ID = '13sQCCsWMCvYFd9ymU0V5raRY0swLERybFz2ic6CTvcA';
-const STRATEGY_FILE_PATH = '/Users/murs/Documents/曜亞X默默的社群經營/Planning/Project_Requirements_Strategy.md';
+const CREDENTIALS_PATH = config.CREDENTIALS_PATH;
+const PRESENTATION_ID = config.SLIDES_ID;
+const STRATEGY_FILE_PATH = path.join(config.PLANNING_DIR, 'Project_Requirements_Strategy.md');
 
 async function syncPresentation() {
   try {
@@ -37,7 +39,7 @@ async function syncPresentation() {
     await drive.files.update({
       fileId: PRESENTATION_ID,
       requestBody: {
-        name: '2025_12_曜亞X默默的社群經營 - B2B 專業提案'
+        name: '2026_01_曜亞X默默的社群經營 - B2B 專業提案'
       }
     });
     console.log('✅ 標題已更新');

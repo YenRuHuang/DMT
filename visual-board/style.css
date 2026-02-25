@@ -1,12 +1,12 @@
 /* ===== CSS Variables ===== */
 :root {
     /* Brand Colors */
-    --hera-primary: linear-gradient(135deg, #ffc0e3, #d4a5ff);
-    --hera-accent: linear-gradient(135deg, #ffd700, #ffb347);
-    --plasma-primary: linear-gradient(135deg, #4a90e2, #50c9ff);
-    --plasma-accent: linear-gradient(135deg, #ffffff, #f0f0f0);
-    --aesthefill-primary: linear-gradient(135deg, #e8b4ff, #c4a0ff);
-    --aesthefill-accent: linear-gradient(135deg, #ffc0e3, #ffb3d9);
+    --neuramis-primary: linear-gradient(135deg, #e8b4ff, #c4a0ff);
+    --neuramis-accent: linear-gradient(135deg, #ffc0e3, #ffb3d9);
+    --cooltech-primary: linear-gradient(135deg, #4a90e2, #50c9ff);
+    --cooltech-accent: linear-gradient(135deg, #ffffff, #f0f0f0);
+    --lpg-primary: linear-gradient(135deg, #ffd700, #ffb347);
+    --lpg-accent: linear-gradient(135deg, #fff2cc, #ffe6cc);
 
     /* UI Colors */
     --bg-dark: #0a0a0f;
@@ -537,16 +537,16 @@ section {
     overflow: hidden;
 }
 
-.hera-visual {
-    background: linear-gradient(135deg, rgba(255, 192, 227, 0.2), rgba(212, 165, 255, 0.2));
+.neuramis-visual {
+    background: linear-gradient(135deg, rgba(232, 180, 255, 0.2), rgba(196, 160, 255, 0.2));
 }
 
-.plasma-visual {
+.cooltech-visual {
     background: linear-gradient(135deg, rgba(74, 144, 226, 0.2), rgba(80, 201, 255, 0.2));
 }
 
-.aesthefill-visual {
-    background: linear-gradient(135deg, rgba(232, 180, 255, 0.2), rgba(196, 160, 255, 0.2));
+.lpg-visual {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 179, 71, 0.2));
 }
 
 .visual-icon {
@@ -665,17 +665,17 @@ section {
     font-weight: 500;
 }
 
-.badge-hera {
-    background: rgba(255, 192, 227, 0.2);
-    color: #ffc0e3;
+.badge-lpg {
+    background: rgba(255, 215, 0, 0.2);
+    color: #ffd700;
 }
 
-.badge-plasma {
+.badge-cooltech {
     background: rgba(74, 144, 226, 0.2);
     color: #50c9ff;
 }
 
-.badge-aesthefill {
+.badge-neuramis {
     background: rgba(232, 180, 255, 0.2);
     color: #e8b4ff;
 }

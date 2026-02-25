@@ -3,8 +3,8 @@
  * 設定工作表標題、欄寬、格式、凍結窗格及資料驗證
  */
 
-const config = require('./config');
-const { getSheetsClient, runScript, logger } = require('./utils');
+const config = require('../../config');
+const { getSheetsClient, runScript, logger } = require('../../utils');
 
 async function formatSheets() {
   logger.info('🚀 開始美化表格...');
@@ -16,7 +16,7 @@ async function formatSheets() {
     // 1. 修改試算表標題
     {
       updateSpreadsheetProperties: {
-        properties: { title: '2025_12_曜亞X默默的社群經營' },
+        properties: { title: '2026_01_曜亞X默默的社群經營' },
         fields: 'title'
       }
     },
@@ -100,7 +100,7 @@ async function formatSheets() {
       setDataValidation: {
         range: { sheetId: DEFAULT_SHEET_ID, startRowIndex: 1, startColumnIndex: 2, endColumnIndex: 3 },
         rule: {
-          condition: { type: 'ONE_OF_LIST', values: [{ userEnteredValue: 'P電漿' }, { userEnteredValue: '精靈聚雙璇' }, { userEnteredValue: 'Hera' }] },
+          condition: { type: 'ONE_OF_LIST', values: [{ userEnteredValue: 'Neuramis' }, { userEnteredValue: 'Cooltech' }, { userEnteredValue: 'LPG' }] },
           showCustomUi: true
         }
       }

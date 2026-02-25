@@ -1,8 +1,9 @@
 const { google } = require('googleapis');
+const config = require('../../config');
 
 // 設定
-const CREDENTIALS_PATH = '/Users/murs/Documents/曜亞X默默的社群經營/glass-tide-461207-j2-8b7a7afd3e07.json';
-const PRESENTATION_ID = '13sQCCsWMCvYFd9ymU0V5raRY0swLERybFz2ic6CTvcA';
+const CREDENTIALS_PATH = config.CREDENTIALS_PATH;
+const PRESENTATION_ID = config.SLIDES_ID;
 
 async function inspectSlides() {
   try {
