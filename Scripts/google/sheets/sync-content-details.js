@@ -2,20 +2,18 @@ const fs = require('fs');
 const path = require('path');
 const { google } = require('googleapis');
 const config = require('../../config');
+const { getPreviousCycle } = require('../../utils');
 
-// Define Cycles to sync (Month System)
+// Define Cycles to sync (前月 + 本月，從 config.CURRENT_CYCLE 動態計算)
+const prev = getPreviousCycle(config.CURRENT_CYCLE);
 const CYCLES = [
   {
-    dir: path.join(config.PROJECT_ROOT, 'Planning', 'Month1'),
-    sheetTitle: 'Month1_文案細節'
+    dir: path.join(config.PROJECT_ROOT, 'Planning', `${prev}_Cycle`),
+    sheetTitle: `${prev}_文案細節`
   },
   {
-    dir: path.join(config.PROJECT_ROOT, 'Output', 'Month2'),
-    sheetTitle: 'Month2_文案細節'
-  },
-  {
-    dir: path.join(config.PROJECT_ROOT, 'Output', 'Month3'),
-    sheetTitle: 'Month3_文案細節'
+    dir: path.join(config.PROJECT_ROOT, 'Planning', `${config.CURRENT_CYCLE}_Cycle`),
+    sheetTitle: `${config.CURRENT_CYCLE}_文案細節`
   }
 ];
 
@@ -194,7 +192,8 @@ async function syncAllContent() {
       files.forEach(f => {
         const p = path.join(cycle.dir, f);
         console.log(`   - 解析: ${f}`);
-        const isJan = cycle.dir.includes('Month1');
+        // 2026_01 (一月) 使用舊版文件格式，其餘月份使用新格式
+        const isJan = cycle.sheetTitle.startsWith('2026_01_');
         const parsed = parseFile(p, isJan);
         // console.log(`     -> Got ${parsed.length} items`);
         allItems.push(...parsed);

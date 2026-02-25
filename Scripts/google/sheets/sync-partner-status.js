@@ -1,5 +1,6 @@
 const { google } = require('googleapis');
 const config = require('../../config');
+const { getPreviousCycle } = require('../../utils');
 
 const PARTNER_SPREADSHEET_ID = '1-3OrOhG0KJ7Q5dIgfTLFcyd2H0jnFLSc8oE-JZov-bE';
 const PARTNER_SHEET_NAME = '工作表4';
@@ -82,8 +83,9 @@ async function syncPartnerStatus() {
 
     console.log(`✅ 檢測到 ${completedItems.size} 筆「已完成」項目 (紅/黃底色)。`);
 
-    // 3. 讀取主要表格數據 (Jan & Feb) & 更新
-    const TARGET_SHEETS = ['2026_01_排程', '2026_02_排程'];
+    // 3. 讀取主要表格數據 (前月 & 本月) & 更新
+    const prev = getPreviousCycle(config.CURRENT_CYCLE);
+    const TARGET_SHEETS = [`${prev}_排程`, `${config.CURRENT_CYCLE}_排程`];
 
     for (const sheetName of TARGET_SHEETS) {
       console.log(`🔍 檢查目標分頁: ${sheetName}...`);
