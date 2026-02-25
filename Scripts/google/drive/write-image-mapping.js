@@ -32,7 +32,7 @@ async function writeMapping() {
   // 2. Get schedule
   const sheetRes = await sheets.spreadsheets.values.get({
     spreadsheetId: config.SPREADSHEET_ID,
-    range: 'Month1_排程!A2:H100'
+    range: `${config.SHEET_NAME}!A2:H100`
   });
   const rows = sheetRes.data.values || [];
 

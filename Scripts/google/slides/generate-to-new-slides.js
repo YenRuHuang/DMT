@@ -4,12 +4,12 @@ const config = require('../../config');
 // 新簡報 ID
 const PRESENTATION_ID = '1kl3-dcJNyP76YA-zGjw0Re7QKJPvmYOPTtU0zcUCUUU';
 const SPREADSHEET_ID = config.INTERNAL_SPREADSHEET_ID;
-const SHEET_NAME = '2026_02_文案細節';
+const SHEET_NAME = `${config.CURRENT_CYCLE}_文案細節`;
 const IMAGE_FOLDER_ID = config.IMAGE_FOLDER_ID;
 
 // 讀取試算表內容
 async function readSpreadsheet(sheets) {
-  console.log('📖 讀取二月試算表內容...');
+  console.log(`📖 讀取 ${config.CURRENT_CYCLE} 試算表內容...`);
   const res = await sheets.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
     range: `${SHEET_NAME}!A2:G100`
@@ -36,7 +36,7 @@ async function readSpreadsheet(sheets) {
     });
   }
 
-  console.log(`   ✓ 找到 ${items.length} 項二月內容\n`);
+  console.log(`   ✓ 找到 ${items.length} 項內容\n`);
   return items;
 }
 

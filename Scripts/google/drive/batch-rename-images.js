@@ -59,11 +59,11 @@ async function batchRename() {
   await traverse(IMAGE_FOLDER_ID);
   console.log(`Found ${allImages.length} images.\n`);
 
-  // 2. Get the Month1 schedule
-  console.log("📊 Reading Month1_排程...");
+  // 2. Get the current month schedule
+  console.log(`📊 Reading ${config.SHEET_NAME}...`);
   const sheetRes = await sheets.spreadsheets.values.get({
     spreadsheetId: config.SPREADSHEET_ID,
-    range: 'Month1_排程!A2:H100'
+    range: `${config.SHEET_NAME}!A2:H100`
   });
   const rows = sheetRes.data.values || [];
 

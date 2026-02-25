@@ -1,7 +1,8 @@
 /**
  * 曜亞 x 默默的社群經營 - 共用工具模組
  *
- * 提供統一的 logger、Google API 客戶端工廠，以及腳本執行包裝器。
+ * 提供統一的 logger、Google API 客戶端工廠，腳本執行包裝器，
+ * 以及換月輔助函式。
  */
 
 const chalk = require('chalk');
@@ -64,6 +65,50 @@ const getSheetsClient = async (scopes = ['https://www.googleapis.com/auth/spread
 };
 
 /**
+ * 建立已認證的 Google Drive 客戶端
+ * @param {string[]} [scopes] - 覆寫預設 scopes（預設為唯讀）
+ * @returns {Promise<import('googleapis').drive_v3.Drive>}
+ */
+const getDriveClient = async (scopes = ['https://www.googleapis.com/auth/drive.readonly']) => {
+  const config = require('./config');
+  const auth = new google.auth.GoogleAuth({
+    keyFile: config.CREDENTIALS_PATH,
+    scopes,
+  });
+  return google.drive({ version: 'v3', auth });
+};
+
+/**
+ * 建立已認證的 Google Slides 客戶端
+ * @param {string[]} [scopes] - 覆寫預設 scopes（預設為完整讀寫）
+ * @returns {Promise<import('googleapis').slides_v1.Slides>}
+ */
+const getSlidesClient = async (scopes = ['https://www.googleapis.com/auth/presentations']) => {
+  const config = require('./config');
+  const auth = new google.auth.GoogleAuth({
+    keyFile: config.CREDENTIALS_PATH,
+    scopes,
+  });
+  return google.slides({ version: 'v1', auth });
+};
+
+/**
+ * 計算上一個月的週期識別碼
+ * 格式：YYYY_MM（例如 '2026_02' → '2026_01'，'2026_01' → '2025_12'）
+ * @param {string} currentCycle - 當前週期識別碼，如 '2026_02'
+ * @returns {string} 上一個月的週期識別碼
+ */
+const getPreviousCycle = (currentCycle) => {
+  const [yearStr, monthStr] = currentCycle.split('_');
+  const year = parseInt(yearStr, 10);
+  const month = parseInt(monthStr, 10);
+  if (month === 1) {
+    return `${year - 1}_12`;
+  }
+  return `${year}_${String(month - 1).padStart(2, '0')}`;
+};
+
+/**
  * 標準腳本執行包裝器
  * 自動加上錯誤捕捉與 process.exit(1)，讓 CI/CD 能偵測失敗。
  * 使用方式：if (require.main === module) { runScript(myAsyncFn); }
@@ -85,5 +130,8 @@ module.exports = {
   logger,
   handleError,
   getSheetsClient,
+  getDriveClient,
+  getSlidesClient,
+  getPreviousCycle,
   runScript,
 };

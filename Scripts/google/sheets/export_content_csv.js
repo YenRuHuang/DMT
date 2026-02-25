@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const config = require('../../config');
 
-const CYCLE_DIR = path.join(config.PROJECT_ROOT, 'Output', '2026_02_Cycle');
-const OUTPUT_FILE = path.join(CYCLE_DIR, 'Internal_Content_Detailed_List_2026_02.csv');
+const CYCLE_DIR = path.join(config.PROJECT_ROOT, 'Output', `${config.CURRENT_CYCLE}_Cycle`);
+const OUTPUT_FILE = path.join(CYCLE_DIR, `Internal_Content_Detailed_List_${config.CURRENT_CYCLE}.csv`);
 
 // Helper to escape CSV fields
 function escapeCsv(field) {

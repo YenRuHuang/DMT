@@ -4,14 +4,12 @@ const config = require('../../config');
 // CONFIGURATION FOR MONTH - APPEND MODE
 const PRESENTATION_ID = '1Gqxzi2ro_A-s3drEHHbsz-Ca_TUxpAONbv476QMK2Gc';
 const SPREADSHEET_ID = config.INTERNAL_SPREADSHEET_ID;
-// Default to Month2, can be extended via CLI args later
-const TARGET_MONTH = 'Month2';
-const SHEET_NAME = `${TARGET_MONTH}_文案細節`;
+const SHEET_NAME = `${config.CURRENT_CYCLE}_文案細節`;
 const IMAGE_FOLDER_ID = config.IMAGE_FOLDER_ID;
 
 // Read content from spreadsheet
 async function readSpreadsheet(sheets) {
-  console.log(`📖 讀取 ${TARGET_MONTH} 試算表內容...`);
+  console.log(`📖 讀取 ${config.CURRENT_CYCLE} 試算表內容...`);
   const res = await sheets.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
     range: `${SHEET_NAME}!A2:G100` // Skip header row

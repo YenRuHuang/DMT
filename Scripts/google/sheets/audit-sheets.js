@@ -11,7 +11,7 @@ async function auditSheets() {
   try {
     const masterRes = await sheets.spreadsheets.values.get({
       spreadsheetId: config.SPREADSHEET_ID,
-      range: '2026_02_排程!A1:G40'
+      range: `${config.SHEET_NAME}!A1:G40`
     });
     const masterRows = masterRes.data.values;
     if (masterRows && masterRows.length) {

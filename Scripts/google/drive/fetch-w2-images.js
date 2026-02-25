@@ -11,7 +11,7 @@ async function fetchW2() {
   try {
     const res = await sheets.spreadsheets.values.get({
         spreadsheetId: config.SPREADSHEET_ID,
-        range: 'Month1_排程!A2:H50'
+        range: `${config.SHEET_NAME}!A2:H50`
     });
     const rows = res.data.values || [];
     const w2Missing = rows.filter(r => r[0] === 'W2' && r[7] && r[7].includes('使用'));

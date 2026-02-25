@@ -3,7 +3,7 @@ const config = require('../config');
 
 // USE MAIN SPREADSHEET ID (Target)
 const TARGET_ID = config.SPREADSHEET_ID;
-const TARGET_SHEET_NAME = '2026_02_排程';
+const TARGET_SHEET_NAME = config.SHEET_NAME;
 
 async function inspectTarget() {
   try {

@@ -22,7 +22,7 @@ async function verify() {
   }
   await traverse(IMAGE_FOLDER_ID);
   
-  const res = await sheets.spreadsheets.values.get({ spreadsheetId: config.SPREADSHEET_ID, range: 'Month1_排程!A2:H50' });
+  const res = await sheets.spreadsheets.values.get({ spreadsheetId: config.SPREADSHEET_ID, range: `${config.SHEET_NAME}!A2:H50` });
   const rows = res.data.values || [];
   
   let slideNum = 0;
